@@ -1,0 +1,529 @@
+make -C ./src/backend generated-headers
+make[1]: Entering directory '/home/postgres/postgresql/postgresql-14.0/src/backend'
+make -C catalog distprep generated-header-symlinks
+make[2]: Entering directory '/home/postgres/postgresql/postgresql-14.0/src/backend/catalog'
+make[2]: Nothing to be done for 'distprep'.
+make[2]: Nothing to be done for 'generated-header-symlinks'.
+make[2]: Leaving directory '/home/postgres/postgresql/postgresql-14.0/src/backend/catalog'
+make -C utils distprep generated-header-symlinks
+make[2]: Entering directory '/home/postgres/postgresql/postgresql-14.0/src/backend/utils'
+make[2]: Nothing to be done for 'distprep'.
+make[2]: Nothing to be done for 'generated-header-symlinks'.
+make[2]: Leaving directory '/home/postgres/postgresql/postgresql-14.0/src/backend/utils'
+make[1]: Leaving directory '/home/postgres/postgresql/postgresql-14.0/src/backend'
+rm -rf '/home/postgres/postgresql/postgresql-14.0'/tmp_install
+/bin/mkdir -p '/home/postgres/postgresql/postgresql-14.0'/tmp_install/log
+make -C '.' DESTDIR='/home/postgres/postgresql/postgresql-14.0'/tmp_install install >'/home/postgres/postgresql/postgresql-14.0'/tmp_install/log/install.log 2>&1
+make -j1  checkprep >>'/home/postgres/postgresql/postgresql-14.0'/tmp_install/log/install.log 2>&1
+make -C src/test check
+make[1]: Entering directory '/home/postgres/postgresql/postgresql-14.0/src/test'
+make -C perl check
+make[2]: Entering directory '/home/postgres/postgresql/postgresql-14.0/src/test/perl'
+make[2]: Nothing to be done for 'check'.
+make[2]: Leaving directory '/home/postgres/postgresql/postgresql-14.0/src/test/perl'
+make -C regress check
+make[2]: Entering directory '/home/postgres/postgresql/postgresql-14.0/src/test/regress'
+make -C ../../../src/port all
+make[3]: Entering directory '/home/postgres/postgresql/postgresql-14.0/src/port'
+make[3]: Nothing to be done for 'all'.
+make[3]: Leaving directory '/home/postgres/postgresql/postgresql-14.0/src/port'
+make -C ../../../src/common all
+make[3]: Entering directory '/home/postgres/postgresql/postgresql-14.0/src/common'
+make[3]: Nothing to be done for 'all'.
+make[3]: Leaving directory '/home/postgres/postgresql/postgresql-14.0/src/common'
+make -C ../../../contrib/spi
+make[3]: Entering directory '/home/postgres/postgresql/postgresql-14.0/contrib/spi'
+make[3]: Nothing to be done for 'all'.
+make[3]: Leaving directory '/home/postgres/postgresql/postgresql-14.0/contrib/spi'
+PATH="/home/postgres/postgresql/postgresql-14.0/tmp_install/usr/local/pgsql/bin:$PATH" LD_LIBRARY_PATH="/home/postgres/postgresql/postgresql-14.0/tmp_install/usr/local/pgsql/lib"  ../../../src/test/regress/pg_regress --temp-instance=./tmp_check --inputdir=. --bindir=     --dlpath=. --max-concurrent-tests=20 --make-testtablespace-dir  --schedule=./parallel_schedule  
+============== removing existing temp instance        ==============
+============== creating temporary instance            ==============
+============== initializing database system           ==============
+============== starting postmaster                    ==============
+running on port 58080 with PID 1852
+============== creating database "regression"         ==============
+CREATE DATABASE
+ALTER DATABASE
+============== running regression test queries        ==============
+test tablespace                   ... ok          260 ms
+parallel group (20 tests):  float4 oid int2 txid regproc name varchar char text pg_lsn uuid bit int8 boolean int4 money enum float8 numeric rangetypes
+     boolean                      ... ok          215 ms
+     char                         ... ok          165 ms
+     name                         ... ok          149 ms
+     varchar                      ... ok          153 ms
+     text                         ... ok          166 ms
+     int2                         ... ok          118 ms
+     int4                         ... ok          219 ms
+     int8                         ... ok          201 ms
+     oid                          ... ok          106 ms
+     float4                       ... ok          104 ms
+     float8                       ... ok          251 ms
+     bit                          ... ok          192 ms
+     numeric                      ... ok          456 ms
+     txid                         ... ok          124 ms
+     uuid                         ... ok          187 ms
+     enum                         ... ok          233 ms
+     money                        ... ok          217 ms
+     rangetypes                   ... ok          522 ms
+     pg_lsn                       ... ok          173 ms
+     regproc                      ... ok          121 ms
+parallel group (20 tests):  line lseg macaddr8 macaddr path circle numerology interval time point date timestamp polygon timetz create_function_0 strings inet timestamptz box multirangetypes
+     strings                      ... ok         1961 ms
+     numerology                   ... ok         1872 ms
+     point                        ... ok         1906 ms
+     lseg                         ... ok           85 ms
+     line                         ... ok           78 ms
+     box                          ... ok         2030 ms
+     path                         ... ok         1495 ms
+     polygon                      ... ok         1917 ms
+     circle                       ... ok         1859 ms
+     date                         ... ok         1906 ms
+     time                         ... ok         1895 ms
+     timetz                       ... ok         1917 ms
+     timestamp                    ... ok         1908 ms
+     timestamptz                  ... ok         1994 ms
+     interval                     ... ok         1891 ms
+     inet                         ... ok         1966 ms
+     macaddr                      ... ok         1479 ms
+     macaddr8                     ... ok          166 ms
+     multirangetypes              ... ok         2112 ms
+     create_function_0            ... ok         1918 ms
+parallel group (12 tests):  unicode comments xid expressions mvcc misc_sanity tstypes horology geometry type_sanity opr_sanity regex
+     geometry                     ... ok          258 ms
+     horology                     ... ok          240 ms
+     tstypes                      ... ok          234 ms
+     regex                        ... ok         1636 ms
+     type_sanity                  ... ok          264 ms
+     opr_sanity                   ... ok          515 ms
+     misc_sanity                  ... ok          220 ms
+     comments                     ... ok           63 ms
+     expressions                  ... ok          212 ms
+     unicode                      ... ok           47 ms
+     xid                          ... ok          187 ms
+     mvcc                         ... ok          211 ms
+test create_function_1            ... ok           37 ms
+test create_type                  ... ok           52 ms
+test create_table                 ... ok          341 ms
+test create_function_2            ... ok           16 ms
+parallel group (5 tests):  copyselect copydml insert_conflict insert copy
+     copy                         ... ok          429 ms
+     copyselect                   ... ok           56 ms
+     copydml                      ... ok           75 ms
+     insert                       ... ok          356 ms
+     insert_conflict              ... ok          209 ms
+parallel group (3 tests):  create_operator create_procedure create_misc
+     create_misc                  ... ok           96 ms
+     create_operator              ... ok           38 ms
+     create_procedure             ... ok           64 ms
+parallel group (5 tests):  create_index_spgist create_view index_including index_including_gist create_index
+     create_index                 ... ok         4592 ms
+     create_index_spgist          ... ok         4307 ms
+     create_view                  ... ok         4320 ms
+     index_including              ... ok         4327 ms
+     index_including_gist         ... ok         4352 ms
+parallel group (16 tests):  create_cast roleattributes errors hash_func select typed_table create_aggregate create_am create_function_3 drop_if_exists constraints vacuum inherit updatable_views triggers infinite_recurse
+     create_aggregate             ... ok          378 ms
+     create_function_3            ... ok          402 ms
+     create_cast                  ... ok          110 ms
+     constraints                  ... ok         3244 ms
+     triggers                     ... ok         4586 ms
+     select                       ... ok          349 ms
+     inherit                      ... ok         3878 ms
+     typed_table                  ... ok          348 ms
+     vacuum                       ... ok         3876 ms
+     drop_if_exists               ... ok          449 ms
+     updatable_views              ... ok         4487 ms
+     roleattributes               ... ok          179 ms
+     create_am                    ... ok          380 ms
+     hash_func                    ... ok          219 ms
+     errors                       ... ok          199 ms
+     infinite_recurse             ... ok         7114 ms
+test sanity_check                 ... ok         1331 ms
+parallel group (20 tests):  select_distinct_on random select_having delete namespace select_implicit case select_into prepared_xacts transactions portals select_distinct union subselect arrays hash_index update join aggregates btree_index
+     select_into                  ... ok          297 ms
+     select_distinct              ... ok          582 ms
+     select_distinct_on           ... ok          131 ms
+     select_implicit              ... ok          251 ms
+     select_having                ... ok          175 ms
+     subselect                    ... ok          751 ms
+     union                        ... ok          636 ms
+     case                         ... ok          263 ms
+     join                         ... ok         1307 ms
+     aggregates                   ... ok         1330 ms
+     transactions                 ... ok          453 ms
+     random                       ... ok          161 ms
+     portals                      ... ok          494 ms
+     arrays                       ... ok          850 ms
+     btree_index                  ... ok         1766 ms
+     hash_index                   ... ok          883 ms
+     update                       ... ok          965 ms
+     delete                       ... ok          181 ms
+     namespace                    ... ok          219 ms
+     prepared_xacts               ... ok          380 ms
+parallel group (20 tests):  init_privs security_label drop_operator tablesample lock replica_identity collate object_address password identity groupingsets matview generated gist spgist gin brin rowsecurity privileges join_hash
+     brin                         ... ok         8413 ms
+     gin                          ... ok         8406 ms
+     gist                         ... ok         8369 ms
+     spgist                       ... ok         8377 ms
+     privileges                   ... ok         8669 ms
+     init_privs                   ... ok          184 ms
+     security_label               ... ok          270 ms
+     collate                      ... ok         1012 ms
+     matview                      ... ok         8279 ms
+     lock                         ... ok          775 ms
+     replica_identity             ... ok          947 ms
+     rowsecurity                  ... ok         8540 ms
+     object_address               ... ok         1010 ms
+     tablesample                  ... ok          550 ms
+     groupingsets                 ... ok         7975 ms
+     drop_operator                ... ok          335 ms
+     password                     ... ok         1052 ms
+     identity                     ... ok         7964 ms
+     generated                    ... ok         8304 ms
+     join_hash                    ... ok        11394 ms
+parallel group (2 tests):  brin_bloom brin_multi
+     brin_bloom                   ... ok          105 ms
+     brin_multi                   ... ok          187 ms
+parallel group (14 tests):  collate.icu.utf8 async alter_operator dbsize tid tsrf tidrangescan tidscan alter_generic misc incremental_sort sysviews misc_functions create_table_like
+     create_table_like            ... ok          451 ms
+     alter_generic                ... ok          305 ms
+     alter_operator               ... ok          134 ms
+     misc                         ... ok          330 ms
+     async                        ... ok           63 ms
+     dbsize                       ... ok          142 ms
+     misc_functions               ... ok          403 ms
+     sysviews                     ... ok          400 ms
+     tsrf                         ... ok          165 ms
+     tid                          ... ok          158 ms
+     tidscan                      ... ok          217 ms
+     tidrangescan                 ... ok          167 ms
+     collate.icu.utf8             ... ok           54 ms
+     incremental_sort             ... ok          337 ms
+parallel group (6 tests):  collate.linux.utf8 amutils psql_crosstab rules psql stats_ext
+     rules                        ... ok          566 ms
+     psql                         ... ok          581 ms
+     psql_crosstab                ... ok           62 ms
+     amutils                      ... ok           53 ms
+     stats_ext                    ... ok         1491 ms
+     collate.linux.utf8           ... ok           36 ms
+test select_parallel              ... ok         1268 ms
+test write_parallel               ... ok          135 ms
+parallel group (2 tests):  subscription publication
+     publication                  ... ok           82 ms
+     subscription                 ... ok           50 ms
+parallel group (17 tests):  combocid advisory_lock equivclass tsdicts guc xmlmap portals_p2 functional_deps dependency select_views indirect_toast window cluster bitmapops tsearch foreign_key foreign_data
+     select_views                 ... ok          810 ms
+     portals_p2                   ... ok          507 ms
+     foreign_key                  ... ok         3993 ms
+     cluster                      ... ok         1035 ms
+     dependency                   ... ok          782 ms
+     guc                          ... ok          378 ms
+     bitmapops                    ... ok         1051 ms
+     combocid                     ... ok          134 ms
+     tsearch                      ... ok         1113 ms
+     tsdicts                      ... ok          329 ms
+     foreign_data                 ... ok         4000 ms
+     window                       ... ok         1010 ms
+     xmlmap                       ... ok          462 ms
+     functional_deps              ... ok          519 ms
+     advisory_lock                ... ok          169 ms
+     indirect_toast               ... ok          950 ms
+     equivclass                   ... ok          316 ms
+parallel group (6 tests):  jsonpath_encoding json_encoding jsonpath jsonb_jsonpath json jsonb
+     json                         ... ok          170 ms
+     jsonb                        ... ok          289 ms
+     json_encoding                ... ok           58 ms
+     jsonpath                     ... ok           85 ms
+     jsonpath_encoding            ... ok           49 ms
+     jsonb_jsonpath               ... ok          139 ms
+parallel group (18 tests):  returning prepare plancache limit xml copy2 truncate conversion sequence rowtypes largeobject with temp domain rangefuncs polymorphism plpgsql alter_table
+     plancache                    ... ok          325 ms
+     limit                        ... ok          377 ms
+     plpgsql                      ... ok         3171 ms
+     copy2                        ... ok          773 ms
+     temp                         ... ok         1037 ms
+     domain                       ... ok         1094 ms
+     rangefuncs                   ... ok         1093 ms
+     prepare                      ... ok          310 ms
+     conversion                   ... ok          978 ms
+     truncate                     ... ok          974 ms
+     alter_table                  ... ok         3800 ms
+     sequence                     ... ok          975 ms
+     polymorphism                 ... ok         1120 ms
+     rowtypes                     ... ok          973 ms
+     returning                    ... ok          303 ms
+     largeobject                  ... ok          974 ms
+     with                         ... ok         1002 ms
+     xml                          ... ok          463 ms
+parallel group (11 tests):  hash_part reloptions partition_info memoize compression explain partition_aggregate indexing partition_prune partition_join tuplesort
+     partition_join               ... ok         1826 ms
+     partition_prune              ... ok         1800 ms
+     reloptions                   ... ok          270 ms
+     hash_part                    ... ok          164 ms
+     indexing                     ... ok         1648 ms
+     partition_aggregate          ... ok         1471 ms
+     partition_info               ... ok          323 ms
+     tuplesort                    ... ok         1855 ms
+     explain                      ... ok          456 ms
+     compression                  ... ok          452 ms
+     memoize                      ... ok          420 ms
+parallel group (2 tests):  event_trigger oidjoins
+     event_trigger                ... ok          124 ms
+     oidjoins                     ... ok          222 ms
+test fast_default                 ... ok         2856 ms
+test stats                        ... ok          666 ms
+============== shutting down postmaster               ==============
+============== removing temporary instance            ==============
+
+=======================
+ All 209 tests passed. 
+=======================
+
+make[2]: Leaving directory '/home/postgres/postgresql/postgresql-14.0/src/test/regress'
+make -C isolation check
+make[2]: Entering directory '/home/postgres/postgresql/postgresql-14.0/src/test/isolation'
+make -C ../../../src/interfaces/libpq all
+make[3]: Entering directory '/home/postgres/postgresql/postgresql-14.0/src/interfaces/libpq'
+make -C ../../../src/port all
+make[4]: Entering directory '/home/postgres/postgresql/postgresql-14.0/src/port'
+make[4]: Nothing to be done for 'all'.
+make[4]: Leaving directory '/home/postgres/postgresql/postgresql-14.0/src/port'
+make -C ../../../src/common all
+make[4]: Entering directory '/home/postgres/postgresql/postgresql-14.0/src/common'
+make[4]: Nothing to be done for 'all'.
+make[4]: Leaving directory '/home/postgres/postgresql/postgresql-14.0/src/common'
+make[3]: Leaving directory '/home/postgres/postgresql/postgresql-14.0/src/interfaces/libpq'
+make -C ../../../src/port all
+make[3]: Entering directory '/home/postgres/postgresql/postgresql-14.0/src/port'
+make[3]: Nothing to be done for 'all'.
+make[3]: Leaving directory '/home/postgres/postgresql/postgresql-14.0/src/port'
+make -C ../../../src/common all
+make[3]: Entering directory '/home/postgres/postgresql/postgresql-14.0/src/common'
+make[3]: Nothing to be done for 'all'.
+make[3]: Leaving directory '/home/postgres/postgresql/postgresql-14.0/src/common'
+PATH="/home/postgres/postgresql/postgresql-14.0/tmp_install/usr/local/pgsql/bin:$PATH" LD_LIBRARY_PATH="/home/postgres/postgresql/postgresql-14.0/tmp_install/usr/local/pgsql/lib"  ../../../src/test/isolation/pg_isolation_regress --temp-instance=./tmp_check_iso --inputdir=. --outputdir=output_iso --bindir=     --schedule=./isolation_schedule
+============== creating temporary instance            ==============
+============== initializing database system           ==============
+============== starting postmaster                    ==============
+running on port 58080 with PID 3188
+============== creating database "isolation_regression" ==============
+CREATE DATABASE
+ALTER DATABASE
+============== running regression test queries        ==============
+test read-only-anomaly            ... ok           57 ms
+test read-only-anomaly-2          ... ok           40 ms
+test read-only-anomaly-3          ... ok           81 ms
+test read-write-unique            ... ok           44 ms
+test read-write-unique-2          ... ok           53 ms
+test read-write-unique-3          ... ok          172 ms
+test read-write-unique-4          ... ok           78 ms
+test simple-write-skew            ... ok           46 ms
+test receipt-report               ... ok         1185 ms
+test temporal-range-integrity     ... ok          176 ms
+test project-manager              ... ok          175 ms
+test classroom-scheduling         ... ok          284 ms
+test total-cash                   ... ok          101 ms
+test referential-integrity        ... ok          161 ms
+test ri-trigger                   ... ok          116 ms
+test partial-index                ... ok          330 ms
+test two-ids                      ... ok          305 ms
+test multiple-row-versions        ... ok         5204 ms
+test index-only-scan              ... ok          327 ms
+test predicate-lock-hot-tuple     ... ok           33 ms
+test update-conflict-out          ... ok           64 ms
+test deadlock-simple              ... ok           51 ms
+test deadlock-hard                ... ok          739 ms
+test deadlock-soft                ... ok          279 ms
+test deadlock-soft-2              ... ok          212 ms
+test deadlock-parallel            ... ok          444 ms
+test detach-partition-concurrently-1 ... ok          580 ms
+test detach-partition-concurrently-2 ... ok          189 ms
+test detach-partition-concurrently-3 ... ok          768 ms
+test detach-partition-concurrently-4 ... ok          627 ms
+test fk-contention                ... ok           57 ms
+test fk-deadlock                  ... ok          411 ms
+test fk-deadlock2                 ... ok          198 ms
+test fk-partitioned-1             ... ok          364 ms
+test fk-partitioned-2             ... ok          172 ms
+test eval-plan-qual               ... ok         1488 ms
+test eval-plan-qual-trigger       ... ok         3136 ms
+test lock-update-delete           ... ok          612 ms
+test lock-update-traversal        ... ok          123 ms
+test inherit-temp                 ... ok         1325 ms
+test insert-conflict-do-nothing   ... ok           68 ms
+test insert-conflict-do-nothing-2 ... ok          117 ms
+test insert-conflict-do-update    ... ok           82 ms
+test insert-conflict-do-update-2  ... ok           60 ms
+test insert-conflict-do-update-3  ... ok           92 ms
+test insert-conflict-specconflict ... ok         1308 ms
+test delete-abort-savept          ... ok          190 ms
+test delete-abort-savept-2        ... ok          118 ms
+test aborted-keyrevoke            ... ok          170 ms
+test multixact-no-deadlock        ... ok           82 ms
+test multixact-no-forget          ... ok          109 ms
+test lock-committed-update        ... ok          681 ms
+test lock-committed-keyupdate     ... ok          650 ms
+test update-locked-tuple          ... ok           87 ms
+test reindex-concurrently         ... ok          910 ms
+test reindex-schema               ... ok          125 ms
+test propagate-lock-delete        ... ok          255 ms
+test tuplelock-conflict           ... ok          429 ms
+test tuplelock-update             ... ok          296 ms
+test tuplelock-upgrade-no-deadlock ... ok          761 ms
+test tuplelock-partition          ... ok           67 ms
+test freeze-the-dead              ... ok           79 ms
+test nowait                       ... ok           80 ms
+test nowait-2                     ... ok           58 ms
+test nowait-3                     ... ok           78 ms
+test nowait-4                     ... ok           91 ms
+test nowait-5                     ... ok           96 ms
+test skip-locked                  ... ok          232 ms
+test skip-locked-2                ... ok           76 ms
+test skip-locked-3                ... ok           89 ms
+test skip-locked-4                ... ok          103 ms
+test drop-index-concurrently-1    ... ok          129 ms
+test multiple-cic                 ... ok           60 ms
+test alter-table-1                ... ok         2228 ms
+test alter-table-2                ... ok          843 ms
+test alter-table-3                ... ok         8191 ms
+test alter-table-4                ... ok          191 ms
+test create-trigger               ... ok          435 ms
+test sequence-ddl                 ... ok          311 ms
+test async-notify                 ... ok           74 ms
+test vacuum-reltuples             ... ok           89 ms
+test timeouts                     ... ok          186 ms
+test vacuum-concurrent-drop       ... ok          156 ms
+test vacuum-conflict              ... ok          181 ms
+test vacuum-skip-locked           ... ok          153 ms
+test horizons                     ... ok           94 ms
+test predicate-hash               ... ok          291 ms
+test predicate-gist               ... ok          597 ms
+test predicate-gin                ... ok         1079 ms
+test partition-concurrent-attach  ... ok          108 ms
+test partition-key-update-1       ... ok          482 ms
+test partition-key-update-2       ... ok          267 ms
+test partition-key-update-3       ... ok          335 ms
+test partition-key-update-4       ... ok          145 ms
+test plpgsql-toast                ... ok          253 ms
+test truncate-conflict            ... ok          386 ms
+test serializable-parallel        ... ok          131 ms
+test serializable-parallel-2      ... ok           84 ms
+============== shutting down postmaster               ==============
+============== removing temporary instance            ==============
+
+======================
+ All 98 tests passed. 
+======================
+
+make[2]: Leaving directory '/home/postgres/postgresql/postgresql-14.0/src/test/isolation'
+make -C modules check
+make[2]: Entering directory '/home/postgres/postgresql/postgresql-14.0/src/test/modules'
+make -C brin check
+make[3]: Entering directory '/home/postgres/postgresql/postgresql-14.0/src/test/modules/brin'
+make -C ../../../../src/test/regress pg_regress
+make[4]: Entering directory '/home/postgres/postgresql/postgresql-14.0/src/test/regress'
+make -C ../../../src/port all
+make[5]: Entering directory '/home/postgres/postgresql/postgresql-14.0/src/port'
+make[5]: Nothing to be done for 'all'.
+make[5]: Leaving directory '/home/postgres/postgresql/postgresql-14.0/src/port'
+make -C ../../../src/common all
+make[5]: Entering directory '/home/postgres/postgresql/postgresql-14.0/src/common'
+make[5]: Nothing to be done for 'all'.
+make[5]: Leaving directory '/home/postgres/postgresql/postgresql-14.0/src/common'
+make[4]: Leaving directory '/home/postgres/postgresql/postgresql-14.0/src/test/regress'
+make -C ../../../../src/test/isolation all
+make[4]: Entering directory '/home/postgres/postgresql/postgresql-14.0/src/test/isolation'
+make -C ../../../src/interfaces/libpq all
+make[5]: Entering directory '/home/postgres/postgresql/postgresql-14.0/src/interfaces/libpq'
+make -C ../../../src/port all
+make[6]: Entering directory '/home/postgres/postgresql/postgresql-14.0/src/port'
+make[6]: Nothing to be done for 'all'.
+make[6]: Leaving directory '/home/postgres/postgresql/postgresql-14.0/src/port'
+make -C ../../../src/common all
+make[6]: Entering directory '/home/postgres/postgresql/postgresql-14.0/src/common'
+make[6]: Nothing to be done for 'all'.
+make[6]: Leaving directory '/home/postgres/postgresql/postgresql-14.0/src/common'
+make[5]: Leaving directory '/home/postgres/postgresql/postgresql-14.0/src/interfaces/libpq'
+make -C ../../../src/port all
+make[5]: Entering directory '/home/postgres/postgresql/postgresql-14.0/src/port'
+make[5]: Nothing to be done for 'all'.
+make[5]: Leaving directory '/home/postgres/postgresql/postgresql-14.0/src/port'
+make -C ../../../src/common all
+make[5]: Entering directory '/home/postgres/postgresql/postgresql-14.0/src/common'
+make[5]: Nothing to be done for 'all'.
+make[5]: Leaving directory '/home/postgres/postgresql/postgresql-14.0/src/common'
+make[4]: Leaving directory '/home/postgres/postgresql/postgresql-14.0/src/test/isolation'
+PATH="/home/postgres/postgresql/postgresql-14.0/tmp_install/usr/local/pgsql/bin:$PATH" LD_LIBRARY_PATH="/home/postgres/postgresql/postgresql-14.0/tmp_install/usr/local/pgsql/lib"  ../../../../src/test/isolation/pg_isolation_regress --temp-instance=./tmp_check_iso --inputdir=. --outputdir=output_iso --bindir=     --dbname=isolation_regression summarization-and-inprogress-insertion
+============== creating temporary instance            ==============
+============== initializing database system           ==============
+============== starting postmaster                    ==============
+running on port 58080 with PID 3890
+============== creating database "isolation_regression" ==============
+CREATE DATABASE
+ALTER DATABASE
+============== running regression test queries        ==============
+test summarization-and-inprogress-insertion ... ok          258 ms
+============== shutting down postmaster               ==============
+============== removing temporary instance            ==============
+
+=====================
+ All 1 tests passed. 
+=====================
+
+TAP tests not enabled
+make[3]: Leaving directory '/home/postgres/postgresql/postgresql-14.0/src/test/modules/brin'
+make -C commit_ts check
+make[3]: Entering directory '/home/postgres/postgresql/postgresql-14.0/src/test/modules/commit_ts'
+make -C ../../../../src/test/regress pg_regress
+make[4]: Entering directory '/home/postgres/postgresql/postgresql-14.0/src/test/regress'
+make -C ../../../src/port all
+make[5]: Entering directory '/home/postgres/postgresql/postgresql-14.0/src/port'
+make[5]: Nothing to be done for 'all'.
+make[5]: Leaving directory '/home/postgres/postgresql/postgresql-14.0/src/port'
+make -C ../../../src/common all
+make[5]: Entering directory '/home/postgres/postgresql/postgresql-14.0/src/common'
+make[5]: Nothing to be done for 'all'.
+make[5]: Leaving directory '/home/postgres/postgresql/postgresql-14.0/src/common'
+make[4]: Leaving directory '/home/postgres/postgresql/postgresql-14.0/src/test/regress'
+make -C ../../../../src/test/isolation all
+make[4]: Entering directory '/home/postgres/postgresql/postgresql-14.0/src/test/isolation'
+make -C ../../../src/interfaces/libpq all
+make[5]: Entering directory '/home/postgres/postgresql/postgresql-14.0/src/interfaces/libpq'
+make -C ../../../src/port all
+make[6]: Entering directory '/home/postgres/postgresql/postgresql-14.0/src/port'
+make[6]: Nothing to be done for 'all'.
+make[6]: Leaving directory '/home/postgres/postgresql/postgresql-14.0/src/port'
+make -C ../../../src/common all
+make[6]: Entering directory '/home/postgres/postgresql/postgresql-14.0/src/common'
+make[6]: Nothing to be done for 'all'.
+make[6]: Leaving directory '/home/postgres/postgresql/postgresql-14.0/src/common'
+make[5]: Leaving directory '/home/postgres/postgresql/postgresql-14.0/src/interfaces/libpq'
+make -C ../../../src/port all
+make[5]: Entering directory '/home/postgres/postgresql/postgresql-14.0/src/port'
+make[5]: Nothing to be done for 'all'.
+make[5]: Leaving directory '/home/postgres/postgresql/postgresql-14.0/src/port'
+make -C ../../../src/common all
+make[5]: Entering directory '/home/postgres/postgresql/postgresql-14.0/src/common'
+make[5]: Nothing to be done for 'all'.
+make[5]: Leaving directory '/home/postgres/postgresql/postgresql-14.0/src/common'
+make[4]: Leaving directory '/home/postgres/postgresql/postgresql-14.0/src/test/isolation'
+PATH="/home/postgres/postgresql/postgresql-14.0/tmp_install/usr/local/pgsql/bin:$PATH" LD_LIBRARY_PATH="/home/postgres/postgresql/postgresql-14.0/tmp_install/usr/local/pgsql/lib"  ../../../../src/test/regress/pg_regress --temp-instance=./tmp_check --inputdir=. --bindir=     --temp-config=../../../../src/test/modules/commit_ts/commit_ts.conf --dbname=contrib_regression commit_timestamp
+============== creating temporary instance            ==============
+============== initializing database system           ==============
+============== starting postmaster                    ==============
+running on port 58080 with PID 3948
+============== creating database "contrib_regression" ==============
+CREATE DATABASE
+ALTER DATABASE
+============== running regression test queries        ==============
+test commit_timestamp             ... ok          269 ms
+============== shutting down postmaster               ==============
+============== removing temporary instance            ==============
+
+=====================
+ All 1 tests passed. 
+=====================
+
+TAP tests not enabled
+make[3]: Leaving directory '/home/postgres/postgresql/postgresql-14.0/src/test/modules/commit_ts'
+make -C

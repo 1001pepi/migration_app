@@ -1,0 +1,13 @@
+Installation Summary
+---------------------
+Hostname        :  myvm
+Distribution    :  bionic
+MAC Address     :  00:16:3E:20:DD:83
+IP Address(es)  :  10.0.0.2 
+SSH Fingerprint :  SHA256:bZpIiBBzzbpalLRLhM8HrxzxOuVfp/C9CS290BH2j38 (DSA)
+SSH Fingerprint :  SHA256:ENWHFmWdjtT1+0W5i8ZmYaNLNZzllz7ZOXeCA3JqQiw (ECDSA)
+SSH Fingerprint :  SHA256:aCn0pdxQKbMH9HvqB+HvruognX3rHiz58F4g56uCb9Y (ED25519)
+SSH Fingerprint :  SHA256:ik80tngkEj/vv/PnhYDJtxJGGaZxghydr+RSfDJe93c (RSA)
+Root Password   :  v3skjErvfxmYxtgd42wbZYN
+
+
