@@ -1,0 +1,1 @@
+sse4.2 sse4.1 ssse3 pclmulqdq sse3 sse2 sse mmx osxsave xsave aes popcnt htt ss fxsr acpi clfsh pat cmov mca apic mce pae msr tsc de fpu

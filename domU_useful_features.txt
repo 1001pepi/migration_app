@@ -1,3 +1,0 @@
-sse
-fxsr
-fpu

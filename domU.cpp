@@ -4,6 +4,9 @@ December 2022
 */
 #include <bits/stdc++.h>
 #include<unistd.h>
+
+#include "run_tests.h"
+
 using namespace std;
 
 struct FeaturesList {string list[32];};
@@ -11,9 +14,9 @@ struct FeaturesList {string list[32];};
 //**********************************************************************************************************
 //GLOBAL VARIABLES
 int REGISTER_SIZE = 32;
-string DOM0_APP_DIRECTORY = "pepi@192.168.1.101:/home/pepi/migration_app";
-string POSTGRES_INSTALLATION_DIRECTORY = "/home/postgres/postgresql/postgresql-14.0";
-string TESTS_LOG_FILE_NAME = "tests_log.txt";
+std::map<std::string, std::string> options;
+string DOM0_APP_DIRECTORY;
+string LOG_FILE_PATH;
 string FEATURES_FILE_NAME = "features.txt";
 
 /*
@@ -47,6 +50,34 @@ map<tuple<int32_t, int32_t, string>, FeaturesList> FEATURES_BITS{
 
 //***************************************************************
 //CUSTOM FUNCTIONS
+
+//function to read config file options
+void parseConfig(std::istream & cfgfile){
+    for (std::string line; std::getline(cfgfile, line); ){
+
+        std::istringstream iss(line);
+        std::string id, eq, val;
+
+        bool error = false;
+
+        if (!(iss >> id)){
+            error = true;
+
+        }else if (id[0] == '#'){
+            continue;
+
+        }else if (!(iss >> eq >> val >> std::ws) || eq != "=" || iss.get() != EOF){
+            error = true;
+        }
+
+        if (error){
+            // do something appropriate: throw, skip, warn, etc.
+        }else{
+            options[id] = val;
+        }
+    }
+}
+
 //function to get the list of available features
 void lookForAvailableFeatures(){
     map<tuple<int32_t, int32_t, string>, vector<string>> availableFeatures;
@@ -121,6 +152,12 @@ void lookForAvailableFeatures(){
 //**********************************
 //MAIN FUNCTION
 int main(){
+    ifstream confFile("/usr/local/share/migration_app/config.cfg");
+    parseConfig(confFile);
+
+    DOM0_APP_DIRECTORY = options["DOM0_APP_DIRECTORY"];
+    LOG_FILE_PATH = options["LOG_FILE_PATH"];
+
     //look for available features
     lookForAvailableFeatures();
 
@@ -128,17 +165,11 @@ int main(){
     string cmd = "scp " + FEATURES_FILE_NAME + " " + DOM0_APP_DIRECTORY;
     int status = system(cmd.c_str());
 
-    //start the postgresql server
-    system("sudo -u postgres /usr/local/pgsql/bin/pg_ctl -D /usr/local/pgsql/data -l logfile start");
-
-    //delete the previous log file
-    system(("rm " + POSTGRES_INSTALLATION_DIRECTORY + "/" + TESTS_LOG_FILE_NAME).c_str());
-
-    //launch the tests
-    system(("cd " + POSTGRES_INSTALLATION_DIRECTORY + " && sudo -u postgres make check-world > " + POSTGRES_INSTALLATION_DIRECTORY + "/" + TESTS_LOG_FILE_NAME).c_str());
+    //run the tests
+    runTests();
     
     //send the results of the tests
-    string cmd2 = "scp " + POSTGRES_INSTALLATION_DIRECTORY+"/"+TESTS_LOG_FILE_NAME + " " + DOM0_APP_DIRECTORY;
+    string cmd2 = "scp " + LOG_FILE_PATH + " " + DOM0_APP_DIRECTORY;
     system(cmd2.c_str());
 
     return 0;

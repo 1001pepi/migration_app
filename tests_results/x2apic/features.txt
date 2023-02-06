@@ -1,2 +1,2 @@
-1 -1 ecx hypervisor rdrand f16c avx osxsave xsave aes popcnt movbe sse4.2 sse4.1 fma ssse3 pclmulqdq sse3
+1 -1 ecx avx osxsave xsave aes popcnt x2apic sse4.2 sse4.1 ssse3 pclmulqdq sse3
 1 -1 edx htt ss sse2 sse fxsr mmx acpi clfsh pat cmov mca apic mce pae msr tsc de fpu

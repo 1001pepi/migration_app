@@ -20,8 +20,9 @@ int main(int argc, char **argv){
 
         if(action == "start"){
             system("./dom0 start");
+            
         }else if(action == "stop"){
-            system("killall dom0 && xl destroy myvm");
+            system("killall dom0 && xl destroy mavm");
 
         }else if(action == "resume"){
             system("./dom0 resume");

@@ -17,8 +17,8 @@ int REGISTER_SIZE = 32;
 string FEATURES_FILE_NAME = "features.txt";
 string TESTS_LOG_FILE_NAME = "tests_log.txt";
 string LAUNCHING_FAILED_FILE_NAME = "launchingFailed.txt";
-string DOMU_NAME = "myvm";
-string ORIGINAL_CONFIG_FILE = "myvm.cfg";
+string DOMU_NAME = "mavm";
+string ORIGINAL_CONFIG_FILE = "mavm.cfg";
 string CUSTOM_CONFIG_FILE = "curr_conf.cfg";
 string TESTS_RESULTS_DIR  = "tests_results";
 string DOMU_DEFAULT_FEATURES_DIR = "domU_default_features";
@@ -402,7 +402,7 @@ int main(int argc, char **argv){
     }
 
     //récupération de la liste des features par défaut du domU
-    /* int res =  getDomUDefaultFeatures(ORIGINAL_CONFIG_FILE);
+    int res =  getDomUDefaultFeatures(ORIGINAL_CONFIG_FILE);
     if(res == 0){
         system(("mv " + FEATURES_FILE_NAME + " ./" + DOMU_DEFAULT_FEATURES_DIR + "/").c_str());
 
@@ -410,7 +410,7 @@ int main(int argc, char **argv){
         system(("rm " + LAUNCHING_FAILED_FILE_NAME).c_str());
         cout << "Failed to get the domU default features!" << endl;
         return -1;
-    } */
+    }
 
     vector<string> orderedFeatures;
 
